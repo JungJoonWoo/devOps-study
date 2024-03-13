@@ -11,6 +11,7 @@ public class DayMain {
     try {
       day = Day.valueOf(sc.nextLine().toUpperCase());
     } catch (Exception e) {
+      System.err.println(e);
       System.out.println("존재하지 않는 요일");
       return;
     }
