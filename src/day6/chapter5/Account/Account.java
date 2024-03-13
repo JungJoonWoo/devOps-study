@@ -15,10 +15,18 @@ public class Account {
   }
 
   public void setPassword(String password) {
+    if (password == null) {
+      System.out.println("심각한 문제 발생");
+      return;
+    }
     this.password = password;
   }
 
   public void setBalance(long balance) {
+    if (balance <= 0) {
+      System.out.println("심각한 문제 발생");
+      return;
+    }
     this.balance = balance;
   }
 
