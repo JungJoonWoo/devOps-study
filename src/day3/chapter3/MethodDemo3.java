@@ -6,7 +6,7 @@ import java.util.function.Function;
 public class MethodDemo3 {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    System.out.printf("점수를 입력하세요: ");
+    System.out.print("점수를 입력하세요: ");
     int score = sc.nextInt();
     if (checkScore(score)) {
       Function<Integer, String> grade = checkGrade();

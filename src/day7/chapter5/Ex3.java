@@ -13,6 +13,5 @@ public class Ex3 {
     if (url.contains("java")) {
       System.out.println("java를 포함");
     }
-
   }
 }

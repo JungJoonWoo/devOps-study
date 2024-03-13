@@ -28,7 +28,7 @@ public class AccountMain {
           }
         }
         case 3 -> {
-          System.out.printf("출금할 계좌, 금액 입력: ");
+          System.out.print("출금할 계좌, 금액 입력: ");
           account.withdraw(sc.next(), sc.nextLong());
         }
         case 4 -> {
@@ -36,7 +36,7 @@ public class AccountMain {
           account.checkBalance(sc.next());
         }
         case 5 -> {
-          System.out.printf("비밀번호를 변경하는 계좌와 기존 비밀번호: ");
+          System.out.print("비밀번호를 변경하는 계좌와 기존 비밀번호: ");
           if (account.changePw(sc.next(), sc.next())) {
             System.out.println("비밀번호 변경 완료");
           } else {

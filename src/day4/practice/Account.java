@@ -66,7 +66,7 @@ public class Account {
   public boolean withdraw(String accountNo, Long amount) {
     if (Account.accounts.containsKey(accountNo)) {
       Account tempAccount = Account.accounts.get(accountNo);
-      Long b = tempAccount.getBalance();
+      long b = tempAccount.getBalance();
       if (b < amount) {
         return false;
       }
