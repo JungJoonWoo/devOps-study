@@ -1,4 +1,4 @@
-package day8;
+package day8.chapter6;
 
 public class InstanceofDemo2 {
   public static void main(String[] args) {

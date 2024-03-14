@@ -1,4 +1,6 @@
-package day8.Ex4;
+package day8.chapter6.Ex4;
+
+import day8.chapter6.Ex4.Parent;
 
 public class Child extends Parent {
   private String name = "사도세자";

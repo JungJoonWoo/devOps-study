@@ -1,4 +1,4 @@
-package day8.Ex4;
+package day8.chapter6.Ex4;
 
 public class Main {
   public static void main(String[] args) {

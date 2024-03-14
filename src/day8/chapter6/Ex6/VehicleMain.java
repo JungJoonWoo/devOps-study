@@ -1,4 +1,4 @@
-package day8.Ex6;
+package day8.chapter6.Ex6;
 
 public class VehicleMain {
   public static void main(String[] args) {
@@ -7,5 +7,6 @@ public class VehicleMain {
     System.out.println();
     Vehicle v = c;
     v.show();
+
   }
 }

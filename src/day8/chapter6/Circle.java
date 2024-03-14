@@ -1,4 +1,4 @@
-package day8;
+package day8.chapter6;
 
 public class Circle {
   private final int radius;

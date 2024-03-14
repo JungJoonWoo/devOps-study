@@ -1,4 +1,4 @@
-package day8.Ex3;
+package day8.chapter6.Ex3;
 
 public class ForeignStudent extends Student {
   private String country;

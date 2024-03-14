@@ -1,4 +1,4 @@
-package day8.Ex2;
+package day8.chapter6.Ex2;
 
 public class Point {
   private int x, y;

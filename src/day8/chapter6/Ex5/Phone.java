@@ -1,4 +1,4 @@
-package day8.Ex5;
+package day8.chapter6.Ex5;
 
 public class Phone {
   protected String owner;

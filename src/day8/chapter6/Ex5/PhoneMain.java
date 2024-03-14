@@ -1,4 +1,4 @@
-package day8.Ex5;
+package day8.chapter6.Ex5;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ public class PhoneMain {
         s.playGame();
       } else if (phone instanceof Telephone t) {
         t.autoAnswering();
-      } else if(phone instanceof Phone p) {
+      } else if (phone instanceof Phone p) {
         p.talk();
       }
     }));

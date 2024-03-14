@@ -1,4 +1,4 @@
-package day8;
+package day8.chapter6;
 
 public class Person {
   private final String residentNo;

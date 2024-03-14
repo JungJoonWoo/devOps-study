@@ -1,4 +1,4 @@
-package day8;
+package day8.chapter6;
 
 import day7.chapter6.Employee;
 import day7.chapter6.Freelancer;

@@ -1,4 +1,4 @@
-package day8.Ex1;
+package day8.chapter6.Ex1;
 
 public class CircleMain {
   public static void main(String[] args) {

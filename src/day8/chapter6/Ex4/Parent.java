@@ -1,4 +1,4 @@
-package day8.Ex4;
+package day8.chapter6.Ex4;
 
 public class Parent {
   String name = " 영조";

@@ -1,4 +1,4 @@
-package day8.Ex6;
+package day8.chapter6.Ex6;
 
 public class Car extends Vehicle {
   private int displacement;

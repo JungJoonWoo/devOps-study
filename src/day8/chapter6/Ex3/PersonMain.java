@@ -1,4 +1,6 @@
-package day8.Ex3;
+package day8.chapter6.Ex3;
+
+import day8.chapter6.Ex3.ForeignStudent;
 
 import java.util.Arrays;
 
