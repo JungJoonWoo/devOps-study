@@ -90,8 +90,7 @@ public class AccountService {
     String accountNo = sc.next();
     String pw = sc.next();
     if (accounts.stream().anyMatch(account -> {
-      boolean b = account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw);
-      return b;
+      return account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw);
     })) {
       System.out.println("확인완료.");
       System.out.println("잔액: " + accounts.stream().filter(account -> account.getAccountNo().equals(accountNo)).findFirst().get().getBalance());
