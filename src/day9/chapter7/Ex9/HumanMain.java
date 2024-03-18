@@ -9,5 +9,6 @@ public class HumanMain {
     Human p = new Worker();
     p.print();
     p.eat();
+
   }
 }
