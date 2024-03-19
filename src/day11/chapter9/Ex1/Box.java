@@ -1,4 +1,4 @@
-package day11.chapter10.Ex1;
+package day11.chapter9.Ex1;
 
 public class Box<T> {
   private T value;

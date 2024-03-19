@@ -1,4 +1,4 @@
-package day11.chapter10;
+package day11.chapter9;
 
 public class EntryMain {
   public static void main(String[] args) {
