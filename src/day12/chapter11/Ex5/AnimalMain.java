@@ -1,8 +1,6 @@
 package day12.chapter11.Ex5;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class AnimalMain {

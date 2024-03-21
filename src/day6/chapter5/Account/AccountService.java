@@ -32,8 +32,7 @@ public class AccountService {
     String accountNo = sc.next();
     String pw = sc.next();
     if (accounts.stream().anyMatch(account -> {
-      boolean b = account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw);
-      return b;
+      return account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw);
     })) {
       System.out.print("확인완료. 입금할 금액을 입력하시오: ");
       do {
