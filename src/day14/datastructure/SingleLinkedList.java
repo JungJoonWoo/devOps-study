@@ -60,7 +60,7 @@ public class SingleLinkedList<E> {
     return getNode(size - 1).getItem();
   }
 
-  private Node<E> getNode(int index) {
+  public Node<E> getNode(int index) {
     if (size - 1 < index) {
       throw new IndexOutOfBoundsException();
     }
@@ -107,4 +107,7 @@ class Node<E> {
     return next;
   }
 
+  public void setNext(Node<E> next) {
+    this.next = next;
+  }
 }
