@@ -12,13 +12,13 @@ public class BracketTest<E> {
         bracket.push(s);
       } else if (s.equals(")")) {
         if (bracket.isEmpty() || !bracket.pop().equals("(")) {
-          System.out.println("괄호가 맞지않음");
+          System.out.println("괄호가 맞지 않음");
           return;
         }
 
       } else if (s.equals("}")) {
         if (bracket.isEmpty() || !bracket.pop().equals("{")) {
-          System.out.println("괄호가 맞지않음");
+          System.out.println("괄호가 맞지 않음");
           return;
         }
       }
