@@ -27,7 +27,7 @@ public class PaymentDAO {
       ps.setString(3, LocalDate.now().toString());
       int balance = resultSetStudent.getInt("amount") - Integer.parseInt(s[2]);
       if (balance < 0) {
-        System.err.println("잔액보다 비쌈");
+        System.err.println("잔고부족");
         return;
       }
       ps.setInt(4, Integer.parseInt(s[2]));

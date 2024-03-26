@@ -90,9 +90,6 @@ public class StudentDAO {
     PreparedStatement ps = conn.prepareStatement(sql);
     ps.setInt(1, value);
     ps.setString(2, name);
-    if (ps.executeUpdate() == 1) {
-      return true;
-    }
-    return false;
+    return ps.executeUpdate() == 1;
   }
 }
