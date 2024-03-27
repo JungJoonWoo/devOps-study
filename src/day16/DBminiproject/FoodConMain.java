@@ -1,14 +1,14 @@
-package day16.miniproject;
+package day16.DBminiproject;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import static day16.miniproject.PaymentDAO.insertPayment;
-import static day16.miniproject.RestaurantDAO.insertRestaurant;
-import static day16.miniproject.RestaurantDAO.updateRestaurant;
-import static day16.miniproject.StudentDAO.insertStudent;
-import static day16.miniproject.StudentDAO.updateStudent;
+import static day16.DBminiproject.PaymentDAO.insertPayment;
+import static day16.DBminiproject.RestaurantDAO.insertRestaurant;
+import static day16.DBminiproject.RestaurantDAO.updateRestaurant;
+import static day16.DBminiproject.StudentDAO.insertStudent;
+import static day16.DBminiproject.StudentDAO.updateStudent;
 
 public class FoodConMain {
 

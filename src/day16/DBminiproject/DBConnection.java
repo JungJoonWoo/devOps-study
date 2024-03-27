@@ -1,4 +1,4 @@
-package day16.miniproject;
+package day16.DBminiproject;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package day16.miniproject;
+package day16.DBminiproject;
 
 public class Student {
   private int id;
