@@ -1,9 +1,7 @@
 package day6.chapter5.Account;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class AccountService {
   List<Account> accounts = new ArrayList<>();
@@ -104,9 +102,16 @@ public class AccountService {
     Scanner sc = new Scanner(System.in);
     String accountNo = sc.next();
     String pw = sc.next();
-    if (accounts.stream().anyMatch(account -> {
-      return account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw);
-    })) {
+
+//    for (Account account : accounts) {
+//      if (account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw)) {
+//        account.setPassword(pw);
+//      }
+//    }
+
+
+    if (accounts.stream().anyMatch(account -> account.getAccountNo().equals(accountNo) && account.getPassword().equals(pw)))
+    {
       System.out.print("확인완료. 변경할 비밀번호를 입력하시오: ");
       do {
         String changeName = sc.next();

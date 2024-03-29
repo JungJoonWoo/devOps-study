@@ -9,6 +9,14 @@ public class User {
   private int point;
   private String password;
 
+  public User(int libId, String username, String telno, String address, int point, String password) {
+    this.libId = libId;
+    this.username = username;
+    this.telno = telno;
+    this.address = address;
+    this.point = point;
+    this.password = password;
+  }
   public User(int id, int libId, String username, String telno, String address, int point, String password) {
     this.id = id;
     this.libId = libId;
@@ -45,5 +53,18 @@ public class User {
 
   public String getPassword() {
     return password;
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+        "id=" + id +
+        ", libId=" + libId +
+        ", username='" + username + '\'' +
+        ", telno='" + telno + '\'' +
+        ", address='" + address + '\'' +
+        ", point=" + point +
+        ", password='" + password + '\'' +
+        '}';
   }
 }

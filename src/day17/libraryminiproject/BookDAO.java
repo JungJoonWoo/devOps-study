@@ -24,15 +24,12 @@ public class BookDAO {
   }
 
   public boolean isBreakBook(Book book) {
-    if (book.getStatus().equals("파손")) {
-      return true;
-    }
-    return false;
+    return book.getStatus().equals("파손");
   }
   //존재하는지 확인 후 객체 반환
   public Book bookCheck(int libId, String bookname) throws SQLException {
     List<Book> bookList = bookList();
-    List<Book> collect = bookList.stream().filter(book -> book.getBookname().equals(bookname) && book.getLibId() == libId).collect(Collectors.toList());
+    List<Book> collect = bookList.stream().filter(book -> book.getBookname().equals(bookname) && book.getLibId() == libId).toList();
     return collect.getFirst();
   }
 
@@ -107,6 +104,20 @@ public class BookDAO {
     return bookList;
   }
 
+  public Book bookListByUserIdAndLiD(int userId, int libId) throws SQLException {
+    String sql = "select * from books where id=? and lib_id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, userId);
+    ps.setInt(2, libId);
+    ResultSet resultSet = ps.executeQuery();
+    List<Book> bookList = createBookList(resultSet);
+    if (bookList.isEmpty()) {
+      System.err.print("\n*** 책 데이터가 없음 ***\n다시 선택하세요: ");
+      return null;
+    }
+    return bookList.getFirst();
+  }
+
   //출판사로 조회
   public List<Book> bookListByPublisher(String publisher) throws SQLException {
     String sql = "select * from books where publisher=?;";
@@ -140,12 +151,26 @@ public class BookDAO {
     System.out.printf("도서 분류(3글자)를 입력하세요: ");
     String bookClass = sc.nextLine();
     String isbn = UUID.randomUUID().toString().replace("-", "").substring(0, 13);
+    if(isbnDuplicateCheck(isbn)){
+      return null;
+    }
     System.out.printf("구매인지 기증인지 입력하세요: ");
     String kubun = sc.nextLine();
-//    System.out.printf("대출 여부를 입력하세여: ");
     String status = "대출가능";
     return new Book(libId, bookname, writername, publisher, bookClass, isbn, kubun, status);
 
+  }
+
+  private boolean isbnDuplicateCheck(String isbn) throws SQLException {
+    String sql = "Select isbn from books where isbn=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, isbn);
+    ResultSet resultSet = ps.executeQuery();
+    if (resultSet.next()) {
+      System.err.println("이미 존재하는 isbn입니다.");
+      return false;
+    }
+    return true;
   }
 
   public Integer bookCreate(Book book) throws SQLException {

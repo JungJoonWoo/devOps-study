@@ -13,7 +13,7 @@ public class Checkout {
   private Date renewReturnDate;
   private Date checkinDate;
 
-  public Checkout(int id, int libId, int bookId, int userId, Date checkoutDate, Date tobeReturnDate, boolean renew, Date renewReturnDate, Date checkinDate) {
+  public Checkout(int id, int libId, int bookId,int userId, Date checkoutDate, Date tobeReturnDate, boolean renew, Date renewReturnDate, Date checkinDate) {
     this.id = id;
     this.libId = libId;
     this.bookId = bookId;
@@ -41,11 +41,11 @@ public class Checkout {
     return userId;
   }
 
-  public Date getCheckoutDate() {
+  public java.sql.Date getCheckoutDate() {
     return checkoutDate;
   }
 
-  public Date getTobeReturnDate() {
+  public java.sql.Date getTobeReturnDate() {
     return tobeReturnDate;
   }
 
@@ -59,5 +59,20 @@ public class Checkout {
 
   public Date getCheckinDate() {
     return checkinDate;
+  }
+
+  @Override
+  public String toString() {
+    return "Checkout{" +
+        "id=" + id +
+        ", libId=" + libId +
+        ", bookId=" + bookId +
+        ", userId=" + userId +
+        ", checkoutDate=" + checkoutDate +
+        ", tobeReturnDate=" + tobeReturnDate +
+        ", renew=" + renew +
+        ", renewReturnDate=" + renewReturnDate +
+        ", checkinDate=" + checkinDate +
+        '}';
   }
 }
