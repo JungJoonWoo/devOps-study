@@ -1,6 +1,7 @@
 package day17.libraryminiproject;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,13 +20,15 @@ public class CheckoutDAO {
           resultSet.getInt("user_id"),
           resultSet.getDate("checkoutdate"),
           resultSet.getDate("tobereturndate"),
-          resultSet.getBoolean("renew"),
+          resultSet.getString("username"),
+          resultSet.getString("bookname"),
           resultSet.getDate("renewreturn_date"),
-          resultSet.getDate("checkin_date")
-      ));
+          resultSet.getBoolean("renew")));
+
     }
     return checkoutList;
   }
+
 
   List<Checkout> checkoutList() throws SQLException {
     String sql = "select * from checkout;";
@@ -33,7 +36,6 @@ public class CheckoutDAO {
     ResultSet resultSet = ps.executeQuery();
     List<Checkout> checkoutList = createCheckoutList(resultSet);
     if (checkoutList.isEmpty()) {
-      System.err.println("*** 책 데이터가 없음 ***");
       return null;
     }
     return checkoutList;
@@ -80,6 +82,33 @@ public class CheckoutDAO {
     l.add(checkout);
     return l;
   }
+  void renewProcess(Checkout checkout) throws SQLException {
+    String sql = "update checkout set renew=?, renewreturn_date=? where id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setBoolean(1, true);
+    LocalDate renewReturnDate = checkout.getTobeReturnDate().toLocalDate().plusDays(7);
+    ps.setDate(2, Date.valueOf(renewReturnDate));
+    ps.setInt(3, checkout.getId());
+    if (ps.executeUpdate() == 1) {
+      System.out.println("대출기한 연장 성공");
+      return;
+    }
+    System.err.println("대출 기한 연장 실패");
+  }
+//  void renewProcess(Checkout checkout) throws SQLException {
+//    String sql = "update checkout set renew=?,renewreturn_date=? where id=?;";
+//    PreparedStatement ps = conn.prepareStatement(sql);
+//    ps.setBoolean(1, true);
+//    LocalDate renewReturnDate = checkout.getTobeReturnDate().toLocalDate().plusDays(7);
+//    ps.setDate(2, Date.valueOf(renewReturnDate));
+//    ps.setInt(3, checkout.getId());
+//    if (ps.executeUpdate() == 1) {
+//      System.out.println("대출기한 연장 성공");
+//      return;
+//    }
+//    System.err.println("대출 기한 연장 실패");
+//
+//  }
 
 
   List<Object> checkoutListByUserNameAndPassword(String username, String password) throws SQLException {
@@ -95,7 +124,10 @@ public class CheckoutDAO {
     int userId = user.getId();
 
     List<Checkout> checkoutList = checkoutList();
-
+    if (checkoutList == null) {
+      System.err.println("대출한 도서가 없음");
+      return null;
+    }
     List<Checkout> checkouts = checkoutList.stream().filter(c -> c.getUserId() == userId).toList();
     if (checkouts.isEmpty()) {
       System.err.println("본 이용자는 대출한 도서가 없음");
@@ -104,7 +136,6 @@ public class CheckoutDAO {
       objects.add(checkouts);
     }
     return objects;
-
 
   }
 
@@ -130,12 +161,12 @@ public class CheckoutDAO {
     }
     return objects;
 
-
   }
 
+  //  boolean checkoutCheck()
   public Checkout checkoutInfo() throws SQLException {
     Scanner sc = new Scanner(System.in);
-    System.out.printf("도서관 ID를 입력하세요: ");
+    System.out.print("도서관 ID를 입력하세요: ");
     int libId = sc.nextInt();
     sc.nextLine();
     LibraryDAO libraryDAO = new LibraryDAO();
@@ -143,36 +174,63 @@ public class CheckoutDAO {
       System.err.println("존재하지 않는 도서관 입니다. ");
       return null;
     }
-    return null;
+    BookDAO bookDAO = new BookDAO();
 
-//    System.out.printf("도서명을 입력하세요: ");
-//    String bookname = sc.nextLine();
-//    System.out.printf("작가명을 입력하세요: ");
-//    String writername = sc.nextLine();
-//    System.out.printf("출판사를 입력하세요: ");
-//    String publisher = sc.nextLine();
-//    System.out.printf("도서 분류(3글자)를 입력하세요: ");
-//    String bookClass = sc.nextLine();
-//    String isbn = UUID.randomUUID().toString().replace("-", "").substring(0, 13);
-//    if(isbnDuplicateCheck(isbn)){
-//      return null;
-//    }
-//    System.out.printf("구매인지 기증인지 입력하세요: ");
-//    String kubun = sc.nextLine();
-//    String status = "대출가능";
-//    return new Book(libId, bookname, writername, publisher, bookClass, isbn, kubun, status);
+    System.out.print("도서명을 입력하세요: ");
+    String bookname = sc.nextLine();
+    List<Book> bookList = bookDAO.bookListByName(bookname);
+    if (bookList.isEmpty()) {
+      System.err.println("도서명 입력 오류");
+      return null;
+    }
+    Book book = bookList.getFirst();
+    if (!book.getStatus().equals("대출가능")) {
+      System.err.println("대출 가능한 상태가 아닙니다.");
+      return null;
+    }
 
+    if (!(book.getLibId() == libId)) {
+      System.err.println("이 도서관에 없는 책입니다.");
+      return null;
+    }
+    System.out.printf("사용자 이름을 입력하세요: ");
+    String username = sc.nextLine();
+    UserDAO userDAO = new UserDAO();
+    List<User> userList = userDAO.userListByName(username);
+    if (userList.isEmpty()) {
+      System.err.println("잘못된 사용자 입니다.");
+      return null;
+    }
+    List<Checkout> checkoutList = checkoutList();
+    User user = userList.getFirst();
+    long count = 0;
+    if (checkoutList !=null) {
+      count = checkoutList.stream().filter(c -> c.getUserId() == user.getId()).count();
+    }
+    if (count >= 5) {
+      System.err.println("최대 대여 가능 갯수는 5개 입니다.");
+      return null;
+    }
+    Date checkoutDate = Date.valueOf(LocalDate.now());
+    Date toBeReturnDate = Date.valueOf(LocalDate.now().plusDays(14));
+    bookDAO.bookUpdate(book, "대출중");
+    return new Checkout(libId, book.getId(), user.getId(), checkoutDate, toBeReturnDate, username, bookname);
   }
 
+
   public Integer checkoutCreate(Checkout checkout) throws SQLException {
-    String sql = "insert into checkout (lib_id, book_id, user_id, checkoutdate, tobereturndate) values (?,?,?,?,?);";
+    String sql = "insert into checkout (lib_id, book_id, user_id, checkoutdate, tobereturndate, username, bookname, id, renewreturn_date, checkin_date) values (?,?,?,?,?,?,?,?, ?,?);";
     PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     ps.setInt(1, checkout.getLibId());
     ps.setInt(2, checkout.getBookId());
     ps.setInt(3, checkout.getUserId());
     ps.setDate(4, checkout.getCheckoutDate());
     ps.setDate(5, checkout.getTobeReturnDate());
-
+    ps.setString(6, checkout.getUserName());
+    ps.setString(7, checkout.getBookName());
+    ps.setInt(8, checkout.getId());
+    ps.setDate(9, checkout.getTobeReturnDate());
+    ps.setDate(10, checkout.getCheckinDate());
     if (ps.executeUpdate() == 1) {
       ResultSet generatedKeys = ps.getGeneratedKeys();
       if (generatedKeys.next()) {
@@ -181,6 +239,36 @@ public class CheckoutDAO {
         return i;
       }
     }
+    System.err.println("대출 정보 추가에 실패");
+    return null;
+  }
+
+  boolean checkinProcess(Checkout checkout) throws SQLException {
+    String sql = "update checkout set checkin_date=? where id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setDate(1, Date.valueOf(LocalDate.now()));
+    ps.setInt(2, checkout.getId());
+    if (ps.executeUpdate() == 1) {
+      System.out.println("반납 완료");
+      return true;
+    }
+    System.err.println("반납 실패");
+    return false;
+  }
+
+  public void setCheckinDate(Checkout checkout) throws SQLException {
+    String sql = "update checkout set renew=? where id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setBoolean(1,true);
+
+    ps.setInt(2, checkout.getId());
+    if (ps.executeUpdate() == 1) {
+      System.out.println("반납 날짜 등록 성공");
+      return;
+    }
+    System.err.println("반납 날짜 등록 실패");
+  }
+}
 //
 //  List<Checkout> checkoutListByUserId(Connection conn, String userId) {
 //  }
@@ -202,9 +290,7 @@ public class CheckoutDAO {
 //
 //  }
 //
-//  void checkinProcess(Connection conn, User user, Checkout checkout) {
-//
-//  }
+
 //
 //  boolean checkoutCheck(Connection conn, Book book, Checkout checkout) {
 //
@@ -213,4 +299,3 @@ public class CheckoutDAO {
 //  void renewProcess(Connection conn, User user, Checkout checkout) {
 //
 //  }
-  }

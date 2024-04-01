@@ -1,8 +1,10 @@
 package day17.libraryminiproject;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class LibraryMain {
@@ -38,8 +40,8 @@ public class LibraryMain {
     switch (input2) {
       case 1 -> lookupCheckoutService();
       case 2 -> enrollCheckoutService();
-//      case 3 -> modifyUserService();
-//      case 4 -> deleteUserService();
+      case 3 -> checkInService();
+      case 4 -> periodExtension();
       case 5 -> {
         return;
       }
@@ -47,14 +49,101 @@ public class LibraryMain {
     }
   }
 
+  private static void periodExtension() throws SQLException {
+    CheckoutDAO checkoutDAO = new CheckoutDAO();
+    System.out.printf("연장할 계정의 사용자 이름과 비밀번호를 입력하세요: ");
+    String[] s = sc.nextLine().split("[ \n\t,]");
+    List<Object> objects = checkoutDAO.checkoutListByUserNameAndPassword(s[0], s[1]);
+    if (objects == null) {
+      System.err.println("계정 정보가 잘못됨");
+      return;
+    }
+    List<Checkout> checkoutList = (List<Checkout>) objects.getLast();
+    if (checkoutList == null) {
+      System.err.println("대출한 책이 없음");
+      return;
+    }
+    checkoutList.stream().forEach(System.out::println);
+
+    System.out.printf("연장할 책의 이름을 입력하세요: ");
+    String bookname = sc.nextLine();
+    List<Object> objects1 = checkoutDAO.checkoutListByBookName(bookname);
+    if (objects1.isEmpty()) {
+      System.err.println("일치하는 책이 없음");
+      return;
+    }
+    Checkout checkout = (Checkout) objects1.getLast();
+    checkoutDAO.renewProcess(checkout);
+  }
+
+  //사용자 이름, 비밀전호, 반납할 책 입력 -> checkout테이블과 정보가 맞다면 반환, 연체됐다면 포인트 -10, 책 상태 업데이트
+  private static void checkInService() throws SQLException {
+    CheckoutDAO checkoutDAO = new CheckoutDAO();
+    System.out.printf("반납할 사용자의 이름과 비밀번호를 입력하세요: ");
+    String[] s = sc.nextLine().split("[ \n\t,]");
+
+    List<Object> objects = checkoutDAO.checkoutListByUserNameAndPassword(s[0], s[1]);
+
+    if (objects == null) {
+      System.err.println("존재하지 않는 사용자");
+      return;
+    }
+    User user = (User) objects.getFirst();
+    List<Checkout> checkoutList = (List<Checkout>) objects.getLast();
+    checkoutList.forEach(System.out::println);
+    System.out.printf("반납할 책을 입력하세요: ");
+    String bookname = sc.nextLine();
+    if (checkoutList.stream().filter(c -> c.getBookName().equals(bookname)).count() == 0) {
+      System.err.println("대출하지 않은 도서입니다.");
+      return;
+    }
+    List<Object> objects1 = checkoutDAO.checkoutListByBookName(bookname);
+    if (objects1.isEmpty()) {
+      System.err.println("대출목록에 존재하지 않는 책 입니다.");
+      return;
+    }
+    Checkout checkout = (Checkout) objects1.getLast();
+    LocalDate now = LocalDate.now();
+    Date tobeReturnDate = checkout.getTobeReturnDate();
+
+
+    boolean b = checkoutDAO.checkinProcess(checkout);
+    UserDAO userDAO = new UserDAO();
+    if (!checkout.isRenew()) {
+      if (b && tobeReturnDate.after(Date.valueOf(now))) {
+        userDAO.setPoint(user, user.getPoint() + 10);
+      } else if (b && tobeReturnDate.before(Date.valueOf(now))) {
+        Period period = Period.between(tobeReturnDate.toLocalDate(), now);
+        userDAO.setPoint(user, user.getPoint() - Math.abs(10 * period.getDays()));
+      } else {
+        System.err.println("반납실패");
+      }
+
+    } else {
+      Date renewReturnDate = checkout.getRenewReturnDate();
+      if (b && renewReturnDate.after(Date.valueOf(now))) {
+        userDAO.setPoint(user, user.getPoint() + 10);
+      } else if (b && renewReturnDate.before(Date.valueOf(now))) {
+        Period period = Period.between(tobeReturnDate.toLocalDate(), now);
+        userDAO.setPoint(user, user.getPoint() - Math.abs(10 * period.getDays()));
+      } else {
+        System.err.println("반납실패");
+        return;
+      }
+      BookDAO bookDAO = new BookDAO();
+      Book book = (Book) objects1.getFirst();
+      bookDAO.setStatus(book, "대출가능");
+    }
+  }
+
   private static void enrollCheckoutService() throws SQLException {
     CheckoutDAO checkoutDAO = new CheckoutDAO();
     System.out.println("***대출 등록 실행***");
     Checkout checkout = checkoutDAO.checkoutInfo();
-    if (user == null || userDAO.userCreate(user) == null) {
-      System.err.println("***사용자 등록에 실패***\n다시 입력하세요: ");
+    if (checkout == null || checkoutDAO.checkoutCreate(checkout) == null) {
+      System.err.println("***대출에 실패***\n다시 입력하세요: ");
     } else {
-      System.out.println("사용자 정보 추가 성공");
+      System.out.println("대출 성공");
     }
   }
 
@@ -141,10 +230,18 @@ public class LibraryMain {
     System.out.print("삭제할 사용자의 이름과 비밀번호 입력하세요: ");
     String[] s = sc.nextLine().split("[ ,\n\t]");
     //대출 DAO 작성 후 대출중인 책의 이름과 사용자의 이름이 같은지 확인한 후 같다면 대출 불가로 처리
-    //    try{
-//      User user = userDAO.userCheckByUsernameAndPassword(s[0], s[1]);
-//
-//    }catch ()
+    try {
+      User user = userDAO.userCheckByUsernameAndPassword(s[0], s[1]);
+      CheckoutDAO checkoutDAO = new CheckoutDAO();
+      List<Checkout> checkoutList = checkoutDAO.checkoutList();
+      long count = checkoutList.stream().filter(c -> c.getUserName().equals(user.getUsername())).count();
+      if (count != 0) {
+        System.err.println("대출중인 도서가 있을 경우 회원 탈퇴가 불가능");
+      }
+      userDAO.userDelete(user);
+    } catch (Exception e) {
+      System.err.println("사용자 이름과 비밀번호가 일치하지 않음");
+    }
 
   }
 

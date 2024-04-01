@@ -151,9 +151,31 @@ public class UserDAO {
 //
 //  }
 //
-//  void userDelete(User user) {
-//
-//  }
+  void userDelete(User user) throws SQLException {
+    String sql = "delete from users where id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, user.getId());
+
+    if (ps.executeUpdate() == 1) {
+      System.out.println("사용자 삭제 성공");
+      return;
+    }
+    System.err.println("사용자 삭제 실패");
+
+  }
+
+  void setPoint(User user, int value) throws SQLException {
+
+    String sql = "update users set point=? where id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, value);
+    ps.setInt(2, user.getId());
+    if (ps.executeUpdate() == 1) {
+      System.out.println("포인트 수정 성공");
+      return;
+    }
+    System.err.println("포인트 수정 실패");
+  }
 //
 //  Library libraryInfo(Scanner in) {
 //

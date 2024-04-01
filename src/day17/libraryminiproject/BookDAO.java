@@ -151,9 +151,9 @@ public class BookDAO {
     System.out.printf("도서 분류(3글자)를 입력하세요: ");
     String bookClass = sc.nextLine();
     String isbn = UUID.randomUUID().toString().replace("-", "").substring(0, 13);
-    if(isbnDuplicateCheck(isbn)){
-      return null;
-    }
+//    if(isbnDuplicateCheck(isbn)){
+//      return null;
+//    }
     System.out.printf("구매인지 기증인지 입력하세요: ");
     String kubun = sc.nextLine();
     String status = "대출가능";
@@ -196,5 +196,18 @@ public class BookDAO {
 
     System.err.println("도서 정보 추가에 실패");
     return null;
+  }
+
+  void setStatus(Book book ,String status) throws SQLException {
+
+    String sql = "update books set status=? where id=?;";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setString(1, status);
+    ps.setInt(2, book.getId());
+    if (ps.executeUpdate() == 1) {
+      System.out.println("대출 상태 수정 성공");
+      return;
+    }
+    System.err.println("대출상태 수정 실패");
   }
 }
