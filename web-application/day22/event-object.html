@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<h2 id="m">마우스를 올리세요</h2>
+<button onclick="f(event)">클릭하세요</button>
+
+<script>
+	function f(e){
+    alert(`${e.type} + ${e.target} + ${e.currentTarget} + ${e.defaultPrevented}`);
+	}
+
+  document.getElementById("m").onmouseover = f;
+</script>
+</body>
+</html>

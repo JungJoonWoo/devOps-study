@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<form id = "cityform">
+	<input type = "text" id = "city" value = "" readonly>
+	<input type = "radio" name = "city" value = "seoul">서울
+	<input type = "radio" name = "city" value = "busan">부산
+	<input type = "radio" name = "city" value = "gyeongju">경주
+	<!--	<button type = "button" onclick="submitForm()">전송</button>-->
+	<button type = "submit">전송</button>
+
+</form>
+
+<script>
+  document.getElementById("cityform").addEventListener("submit", function (event) {
+	  event.preventDefault();
+    let cities = document.getElementsByName("city");
+    cities.forEach((c) => {
+      if (c.checked) {
+        console.log(c.value);
+        document.getElementById("city").value = c.value;
+      }
+    })
+  });
+
+
+  // function submitForm() {
+  //   let cities = document.getElementsByName("city");
+  //   cities.forEach((c) => {
+  //     if (c.checked) {
+  //       console.log(c.value);
+  //       document.getElementById("city").value = c.value;
+  //     }
+  //   })
+  // }
+
+</script>
+</body>
+</html>

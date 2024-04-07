@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+  function adder(a, b) {
+    return a + b;
+  }
+
+  // let a = parseInt(prompt("A"));
+  // let b = parseInt(prompt("B"));
+  // if (!isNaN(a)&& !isNaN(b)) {
+  //   let result = adder(a, b);
+  //   console.log(result);
+  // }
+	// else
+  //   alert("옳바른 값을 입력하세요");
+
+  let input = prompt("숫자를 입력하세요.");
+  if (!isNaN(parseInt(input))) {
+    if (input > 9 || input < 2) {
+      alert("2~9 사이의 값만 입력하세요.");
+      exit();
+    }
+    for (let i = 1; i < 10; i++) {
+      console.log(`${input} * ${i} = ${input * i}`);
+      document.write(`${input} * ${i} = ${input * i}<br>`);
+    }
+  } else {
+    console.log("올바른 값을 입력하세요");
+  }
+</script>
+</body>
+</html>

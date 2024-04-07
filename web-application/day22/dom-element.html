@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<h3>Dom 객체 p의 프로퍼티, 스타일, 이벤트 리스너</h3>
+<hr />
+<p id = "firstP" style = "color: blue; background-color: yellow;" onclick = "this.style.color='green'">
+	이것은 <span style = "color: red;">처음 문장 입니다</span>
+</p>
+	이것은 <span style = "color: red;">다음 문장 입니다</span>
+
+<script>
+
+
+  const p = document.getElementById("firstP");
+  let text = `
+  p.id=${p.id}\n
+  p.tagName=${p.tegName}\n
+  p.innerHTML=${p.innerHTML}\n
+  p.innerText=${p.innerText}\n
+  p.style.backgroundColor=${p.style.backgroundColor}\n
+  p.style.color=${p.style.color}\n
+  p.childElement=${p.childElementCount}\n
+  p.width=${p.offsetWidth}\n
+  p.height=${p.offsetHeight}\n
+  `;
+  console.log(text);
+  alert(text);
+</script>
+
+</body>
+</html>

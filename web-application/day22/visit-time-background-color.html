@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+
+
+<body id = "body">
+<h2>배경 색을 바꾸는 코드</h2>
+<hr />
+<p id = "p">현재 시간: </p>
+<script>
+  function changeBackgroundColorAndTime() {
+    let date = new Date();
+    if (date.getSeconds() % 2 === 0)
+      document.body.style.backgroundColor = 'violet';
+    else
+      document.body.style.backgroundColor = 'lightskyblue';
+    let p = document.getElementById("p");
+    p.innerText = "현재 시간: " + date;
+  }
+setInterval(changeBackgroundColorAndTime, 1000)
+</script>
+
+</body>
+</html>

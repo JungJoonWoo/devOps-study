@@ -1,0 +1,38 @@
+
+h3, li {
+    color: brown;
+}
+
+#list {
+    background-color: mistyrose;
+}
+
+.main {
+    background-color: aliceblue;
+}
+
+li {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+div strong {
+    color: #1fa8f8;
+}
+
+li > strong {
+    color: darkblue;
+}
+
+li:hover {
+    background-color: yellowgreen;
+}
+
+body {
+    background-color: linen;
+    color: blue;
+}
+h1 {
+    text-align: center;
+
+}

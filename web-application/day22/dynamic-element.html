@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script>
+    function change() {
+      // let p = document.getElementById('span');
+      let p = document.getElementsByTagName("span");
+      console.log(p);
+      // for (let i = 0; i < p.length; i++) {
+      //   p[i].style.fontSize = '40px';
+      //   p[i].style.color = 'green';
+      //   p[i].style.border = "dotted 3px magenta";
+      //   p[i].style.display = 'block';
+      //   p[i].style.lineHeight = 'fontSize';
+      //   p[i].style.width = '8em';
+      // }
+      Array.from(p).forEach( a=> {
+        a.style.fontSize = '40px';
+        a.style.color = 'green';
+        a.style.border = "dotted 3px magenta";
+        a.style.display = 'block';
+        a.style.lineHeight = 'fontSize';
+        a.style.width = '8em';
+      })
+      // p.style.fontSize = '40px';
+      // p.style.color = 'green';
+      // p.style.border = "dotted 3px magenta";
+      // p.style.display = 'block';
+      // p.style.lineHeight = 'fontSize';
+      // p.style.width = '250px';
+    }
+	</script>
+</head>
+<body>
+<h3>Dom 객체 p의 프로퍼티, 스타일, 이벤트 리스너</h3>
+<hr />
+<p id = "firstP" style = "color: blue;" onclick = "this.style.color='green'">
+	이것은 <span id = 'span' style = "color: red;">문장 입니다</span>
+</p>
+	이것은 <span style = "color: red;">다음 문장 입니다</span>
+<br>
+<button id = "button" onclick="change()">스타일 변경</button>
+</body>
+</html>

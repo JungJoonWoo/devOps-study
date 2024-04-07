@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<h3>물품을 선택하면 금액이 자동으로 계산됩니다.</h3>
+<form>
+	<input type = "checkbox" class = "item" name = "hat" id = "hat" value = "10000" onclick = "checkAmount(this)">모자 1만
+	<input type = "checkbox" class = "item" name = "shoes" id = "shoes" value = "30000" onclick = "checkAmount(this)">신발
+	                                                                                                              3만
+	<input type = "checkbox" class = "item" name = "bag" id = "bag" value = "80000" onclick = "checkAmount(this)">가방 8만
+	<label><br>지불하실 금액</label>
+	<input readonly type = "text" value = "0" id = "value">
+</form>
+
+<script>
+  function checkAmount(item) {
+    let valueField = document.getElementById("value");
+    if (item.checked) {
+      valueField.value = parseInt(valueField.value) + parseInt(item.value);
+    } else {
+      valueField.value = parseInt(valueField.value) - parseInt(item.value);
+    }
+  }
+</script>
+</body>
+</html>

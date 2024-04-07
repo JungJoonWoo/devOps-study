@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+  let id = setInterval(() => document.writeln("1초 마다"), 1000);
+  setTimeout(()=> clearInterval(id), 3000)
+
+  for (let i = 0; i < 10; i++) {
+	  document.writeln("끼어들기")
+  }
+</script>
+
+</body>
+</html>

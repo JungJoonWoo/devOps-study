@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+    .images {
+      width: 100%;
+      height: 90vh;
+      object-fit: fill;
+      transition: opacity 1s ease-in-out; /* 이미지 투명도 변화에 대한 부드러운 전환 설정 */
+      border-radius: 10px;
+      opacity: 1; /* 초기 투명도를 1로 설정 */
+    }
+	</style>
+</head>
+<body>
+<h3>2초마다 자동으로 다음 사진으로 변경하는 이미지 슬라이드</h3>
+<hr />
+<div>
+	<img id='img' src="../images/bg0.jpg" class="images">
+	<script>
+    const images = {
+      0: "../images/bg0.jpg",
+      1: "../images/bg1.jpg",
+      2: "../images/bg2.jpg",
+      3: "../images/bg3.jpg",
+    }
+    let i = 0;
+
+    function changeImage1() {
+      let im = document.getElementById('img');
+      // 이미지 투명도를 0으로 만들어 점차 사라지게 함
+      im.style.opacity = 0;
+
+      // 투명도 전환 효과가 끝난 후 이미지 소스를 변경하고 투명도를 다시 1로 설정
+      setTimeout(function() {
+        i++;
+        i %= Object.keys(images).length;
+        im.src = images[i];
+        im.style.opacity = 1; // 이미지가 점차 나타나게 함
+      }, 1000); // CSS transition 시간과 일치하도록 설정 (1초 = 1000ms)
+    }
+
+    // 이미지 전환을 위한 setInterval 설정
+    setInterval(changeImage1, 3000); // 3초마다 changeImage1 함수를 호출
+	</script>
+</div>
+</body>
+</html>

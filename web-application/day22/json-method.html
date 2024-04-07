@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+
+  const jsonObj = [
+    {
+      name: "A",
+    age : 10
+    },
+    {
+      name: "B",
+      age: 30,
+    }
+  ];
+  console.log(jsonObj);
+  let s = JSON.stringify(jsonObj);
+  console.log(s);
+
+  let ss = JSON.parse(s);
+  console.log(typeof s);
+  console.log(typeof ss);
+  console.log(ss);
+</script>
+</body>
+</html>

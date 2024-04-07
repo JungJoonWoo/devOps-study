@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+<script>
+  let arr = [10, 20, 30];
+  arr.forEach((item, index) => {
+    console.log(`index : ${index} item : ${item}`);
+  });
+
+  console.log(arr.map(item => item * item));
+
+  function Account(name, age){
+    this.name = name;
+    this.age = age;
+  }
+
+	let account = new Account("aaa", 123)
+  for (const arrKey in account) {
+    console.log(`${arrKey} , ${account[arrKey]}`);
+  }
+</script>
+</body>
+</html>

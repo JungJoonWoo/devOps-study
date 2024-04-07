@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+
+  function Account(owner, number, balance) {
+    this.owner = owner;
+    this.number = number;
+    this.balance = balance;
+    this.inquiry = function () {
+      return this.balance;
+    };
+    this.withdraw = function (money) {
+      if (money <= this.balance) {
+        this.balance -= parseInt(money);
+        return this.balance;
+      }
+    };
+    this.deposit = function (money) {
+      this.balance += parseInt(money);
+      return this.balance;
+    };
+  }
+
+  let account = new Account("홍길동", "1111", 1500000);
+  let account1 = new Account("ㅇㅇㅇ", "ㅇㅇㅇㅇㅇ", 10000);
+
+  console.log(account);
+  console.log(account.owner);
+  console.log(account.deposit(100));
+  console.log(account.withdraw(50));
+
+  console.log(account1);
+  console.log(account1.owner);
+  console.log(account1.deposit(100));
+  console.log(account1.withdraw(50));
+</script>
+</body>
+</html>

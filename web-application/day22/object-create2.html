@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+  let account = {
+    owner: `홍길동`,
+    number: `1111`,
+    balance: 0,
+    inquiry: function () {
+      return this.balance
+    },
+    withdraw: function (money) {
+      if (money <= this.balance) {
+        this.balance -= parseInt(money)
+        return this.balance
+      }
+    },
+    deposit: function (money) {
+      this.balance += parseInt(money)
+      return this.balance
+    }
+  }
+  console.log(account);
+  console.log(account.owner);
+  console.log(account.deposit(100));
+  console.log(account.withdraw(50));
+</script>
+</body>
+</html>

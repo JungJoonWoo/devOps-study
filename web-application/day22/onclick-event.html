@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+<h3>onclick, 계산기 만들기</h3>
+
+<hr>
+
+<div>계산하고자 하는 수식을 입력하고 계산 버튼을 누르세요</div>
+<form action = "#">
+	<span>식: </span>
+	<input type = "text" id = "i1" value = "">
+	<span>값: </span>
+	<input type = "text" id = "i2" readonly>
+	<button type = "submit" onclick = "calculate()">계산</button>
+</form>
+
+<script>
+  function calculate() {
+    document.getElementById("i2").value = eval(document.getElementById("i1").value);
+  }
+</script>
+</body>
+
+</html>

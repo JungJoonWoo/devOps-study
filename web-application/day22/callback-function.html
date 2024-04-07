@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script>
+    let callback = () => {
+      console.log("callback 함수 입니다");
+    };
+
+    function callTheOther(callback) {
+      callback();
+      callback();
+    }
+
+    callTheOther(callback);
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

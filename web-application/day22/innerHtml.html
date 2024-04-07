@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<script>
+  function imageChange() {
+    let p = document.getElementById('p').innerHTML = "<img src='../images/book1.jpg' alt='img'>";
+  }
+</script>
+<body>
+<h3>innerHTML 콘텐츠 동적 변경</h3>
+<hr />
+<p id = "p" onclick="imageChange()">여기를 <span style="color: red"> </span>클릭하세요</p>
+</body>
+</html>

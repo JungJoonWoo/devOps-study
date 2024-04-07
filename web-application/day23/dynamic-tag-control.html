@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel = "stylesheet"
+	      integrity = "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin = "anonymous">
+
+	<style>
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #6c757d;
+      box-shadow: 0 0 8px #6c757d;
+    }
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    h3 {
+      color: #6c757d;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    li {
+      color: #333;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    button {
+      font-size: 20px;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    li {
+      color: #333;
+      font-size: 20px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+	</style>
+</head>
+<body>
+<h3>DIV 객체 동적으로 생성하고 삭제하기</h3>
+<hr />
+<a href = "javascript:createDIV(this)">DIV 태그 생성하기</a>
+
+<form onsubmit = "return false">
+	<input type = "text" name = "input" id = "input">
+	<button onclick = "addListAndDelete()" class="btn btn-primary rounded">추가</button>
+</form>
+
+<ul id = "listParent" class = "list-group"></ul>
+
+<script>
+
+  function createDIV(obj) {
+
+    let parent = document.body;
+    console.log(`DIV tag를 생성`);
+    let child = document.createElement('div');
+    child.setAttribute("id", "new");
+    child.style.backgroundColor = 'yellow';
+    child.innerHTML = `hello`;
+    parent.appendChild(child);
+
+  }
+
+  function addList() {
+
+    //리스트 추가
+    let parent = document.getElementById("listParent");
+    let list = document.createElement("li");
+    list.innerHTML = document.getElementById('input').value;
+    list.setAttribute("class", 'list-group-item list-group-item-info d-flex');
+    document.getElementById('input').value = "";
+    parent.appendChild(list);
+    return list;
+  }
+
+  function addDeleteButton(parent) {
+    let deleteButton = document.createElement('button');
+    deleteButton.innerHTML = "삭제";
+    deleteButton.style.marginLeft = "10px";
+    deleteButton.setAttribute('class', 'btn btn-danger');
+    parent.appendChild(deleteButton);
+    return deleteButton;
+
+  }
+
+  function deleteElement(obj) {
+    let parent = obj.parentElement;
+    parent.removeChild(obj);
+  }
+
+  function addListAndDelete() {
+
+    let inputValue = document.getElementById('input').value;
+
+    if (!inputValue) {
+      alert('값을 입력해주세요.');
+      return;
+    }
+
+    let list = addList();
+    let deleteButton = addDeleteButton(list);
+    deleteButton.addEventListener('click', function () {
+      deleteElement(list);
+    });
+  }
+</script>
+
+
+<script src = "https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity = "sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin = "anonymous"></script>
+<script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity = "sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin = "anonymous"></script>
+</body>
+</html>

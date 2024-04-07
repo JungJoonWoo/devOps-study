@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport"
+	      content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv = "X-UA-Compatible" content = "ie=edge">
+	<title>Document</title>
+
+	<style>
+    @keyframes textColorAnimation {
+      0% {
+        color: blue;
+      }
+      30% {
+        color: green;
+      }
+      100% {
+        color: red;
+      }
+    }
+
+    span {
+      animation-name: textColorAnimation;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes bomb {
+      from {
+        font-size: 500px;
+      }
+
+      to {
+        font-size: 18px;
+      }
+
+    }
+
+    h3 {
+      animation-name: bomb;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+    }
+
+    div > span {
+      transition: font-size 5s;
+    }
+
+    div > span:hover {
+      font-size: 500px;
+    }
+	</style>
+</head>
+<body>
+<!--<h3>꽝!</h3>-->
+<div>
+	<span>꽝</span>
+</div>
+<p>
+	<span>span</span>
+	텍스트를 5초동안 색 변경
+</p>
+
+</body>
+</html>

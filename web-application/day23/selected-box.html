@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<select name = "fruits" id = "fruits" onchange = "changeInfo()">
+	<option value = "" selected disabled hidden>선택하세요</option>
+	<option value = "1">딸기</option>
+	<option value = "2">바나나</option>
+	<option value = "3">사과</option>
+</select>
+<input type = "text" name = "text" id = "text" readonly>
+<br />
+<img src = "" alt = "" id = "img">
+<script>
+  const fruitInfo = {
+    '1': {
+      text: "딸기",
+      imgSrc: "../images/book1.jpg",
+    },
+    '2': {
+      text: "바나나",
+      imgSrc: "../images/book2.jpg",
+    },
+    '3': {
+      text: "사과",
+      imgSrc: "../images/logo.jpg",
+    }
+  };
+
+  function changeInfo() {
+    let select = document.getElementById("fruits");
+    let sv = select.value;
+    let text = document.getElementById("text");
+    let img = document.getElementById('img');
+
+    text.value = fruitInfo[sv].text;
+    img.src = fruitInfo[sv].imgSrc;
+  }
+</script>
+</body>
+</html>
