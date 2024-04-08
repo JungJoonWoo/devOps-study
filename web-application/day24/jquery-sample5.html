@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script src = "https://code.jquery.com/jquery-3.7.1.min.js"
+	        integrity = "sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin = "anonymous"></script>
+
+	<script>
+    $(document).ready(function () {
+      $("<h1>appendTo</h1>").appendTo($("#target"));
+      $("<h1>prepend</h1>").prependTo($("#target"));
+
+      $("<h1>insertAfter</h1>").insertAfter($("#target"));
+      $("<h1>insertBefore</h1>").insertBefore(target);
+
+    });
+
+	</script>
+</head>
+<body>
+<div id = "target"></div>
+</body>
+</html>

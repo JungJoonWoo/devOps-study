@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script src = "https://code.jquery.com/jquery-3.7.1.min.js" integrity = "sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin = "anonymous"></script>
+
+	<script>
+    $(document).ready(function () {
+      $("button").click(
+        function () {
+          $("p").hide();
+        });
+    })
+    $(document).ready(function () {
+      // $("h1").hide();
+      $("h1.logo").hide();
+      $("h1#head").hide();
+      $("input[type=submit]").hide();
+
+    });
+
+	</script>
+</head>
+<body>
+<h1>h1</h1>
+<h1 class="logo">logo h1</h1>
+<h1 id="head">head</h1>
+<input type = "submit" value = "submit">
+
+<p id = "p">aaa</p>
+<p class = "class">aaa</p>
+<button>여기를 누르세요</button>
+</body>
+</html>
