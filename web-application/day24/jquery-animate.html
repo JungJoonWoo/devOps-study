@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script src = "https://code.jquery.com/jquery-3.7.1.min.js"
+	        integrity = "sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin = "anonymous"></script>
+	<style>
+    .first {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+    }
+    .second {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      left: 10px;
+      top: 300px;
+    }
+	</style>
+	<script>
+    $(document).ready(function () {
+      $(".first").on("click", function () {
+        $(this).animate({
+          left: 1000
+        }, 1000, "swing");
+      })
+	    $(".second").on("click", function () {
+        $(this).animate({
+          left: 1000
+        }, 1000, "linear");
+      })
+    });
+	</script>
+
+</head>
+<body>
+<div class = "box"></div>
+<div class = "first"></div>
+<div class = "second"></div>
+</body>
+</html>
