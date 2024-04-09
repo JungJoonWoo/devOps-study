@@ -1,53 +1,78 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
-	<meta charset = "UTF-8">
-	<title>Title</title>
-	<script src = "https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-	<script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-	<script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<meta charset="UTF-8">
+	<title>Universal Converter App</title>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-<div id = "root"></div>
-<script type = "text/babel">
+<div id="root"></div>
+<script type="text/babel">
 
-  const H = ({numbers}) => {
-    return <h1 className = "header">Converter from {Math.floor(numbers / 60)} Hours</h1>;
-  };
-  const MinLabel = () => {
-    return <label htmlFor = "first">분</label>;
-  };
-  const MinInput1 = ({numbers, onChange}) => {
-    return <input id = "first" type = "number" placeholder = "minitus" value = {numbers} onChange = {onChange} />
-  };
+  const DistanceConverter = () => {
+    let [distance, setDistance] = React.useState(0);
 
-  const HourLabel = () => {
-    return <label htmlFor = "second">시간</label>;
-  };
-  const HourInput1 = ({numbers}) => {
-    return <input id = "second" type = "number" placeholder = "hours" disabled = {true}
-                  value = {Math.floor(numbers / 60)} />
-  };
+    const onDistanceChange = (event) => {
+      setDistance(event.target.value);
+    };
 
-  const APP = () => {
-    let [numbers, setNumbers] = React.useState(0);
-    const onChange = (event) => {
-      setNumbers(event.target.value);
-      console.log(numbers);
-      console.log(event.target);
-      console.log(event.target.value);
-    }
-    return (<div>
-        <H numbers = {numbers} />
-        <MinLabel />
-        <MinInput1 numbers = {numbers} onChange = {onChange} />
-        <HourLabel />
-        <HourInput1 numbers = {numbers} />
+    return (
+      <div>
+        <h2>거리 변환기</h2>
+        <input
+          type="number"
+          value={distance}
+          onChange={onDistanceChange}
+        />
+        <p>미터: {distance} m</p>
+        <p>킬로미터: {distance / 1000} km</p>
       </div>
     );
   }
 
-  ReactDOM.render(<APP />, document.getElementById("root"));
+  const TimeConverter = () => {
+    let [time, setTime] = React.useState(0);
+
+    const onTimeChange = (event) => {
+      setTime(event.target.value);
+    };
+
+    return (
+      <div>
+        <h2>시간 변환기</h2>
+        <input
+          type="number"
+          value={time}
+          onChange={onTimeChange}
+        />
+        <p>초: {time} s</p>
+        <p>분: {time / 60} min</p>
+        <p>시간: {time / 3600} h</p>
+      </div>
+    );
+  }
+
+  const App = () => {
+    const [converter, setConverter] = React.useState('1');
+
+    const handleSelectChange = (event) => {
+      setConverter(event.target.value);
+    };
+
+    return (
+      <div>
+        <select onChange={handleSelectChange} value={converter}>
+          <option value="1">시간 변환</option>
+          <option value="2">거리 변환</option>
+        </select>
+        {converter === '1' ? <TimeConverter /> : <DistanceConverter />}
+      </div>
+    );
+  }
+
+  ReactDOM.render(<App />, document.getElementById("root"));
 </script>
 </body>
 </html>
