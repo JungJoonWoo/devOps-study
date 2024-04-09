@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+<p >0 번 클릭</p>
+<button id = "btn" onclick="increaseNum()">click</button>
+<script>
+  let counter = 0;
+  const p = document.querySelector("p");
+  const btn = document.getElementById("btn");
+
+  function increaseNum() {
+    p.innerHTML=`${++counter} 번 클릭`
+  }
+
+</script>
+</body>
+</html>

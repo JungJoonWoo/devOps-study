@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script src = "https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id = "root"></div>
+<script type = "text/babel">
+
+  // console.log(useState());
+  const onClick = () => {
+    setCount(count + 1);
+  }
+  let root = document.getElementById("root");
+  // let p = React.createElement("p", {id: "count", style: {color: "blue"}}, "This is a p tag");
+  let count = 0;
+
+  // function increaseCount() {
+  //   count++;
+  //   console.log(count);
+  //   render();
+  // }
+
+  // function Btn2() {
+  //   return <button id = "btn" onClick = {() => console.log("button clicked")}>
+  //     Click
+  //   </button>;
+  // }
+
+  function Btn() {
+    // return <button id = "btn" onClick = {() => increaseCount()}>
+    return <button id = "btn" onClick = {() => setCount()}>
+      Click
+    </button>;
+  }
+
+  function P() {
+    return (
+      <p id = "count">{count} 번 클릭</p>
+    )
+  }
+
+  // function P2() {
+  //   return <p id = "count">This is p tag</p>;
+  // }
+
+  function App() {
+    const name = "react";
+    const style = {
+      backgroundColor: "black",
+    }
+    return (
+      <div>
+        <P />
+        <Btn />
+      </div>
+    );
+  }
+
+  function render() {
+    ReactDOM.render(<App />, root);
+  }
+
+  render();
+  // let app = React.createElement("div", null, [p, btn]);
+
+  // ReactDOM.render(app, root);
+  // ReactDOM.render(<App />, root);
+
+</script>
+</body>
+</html>

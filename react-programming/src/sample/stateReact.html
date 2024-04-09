@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+	<script src = "https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<div id = "root"></div>
+<script type = "text/babel">
+
+  const H = ({numbers}) => {
+    return <h1 className = "header">Converter from {Math.floor(numbers / 60)} Hours</h1>;
+  };
+  const MinLabel = () => {
+    return <label htmlFor = "first">분</label>;
+  };
+  const MinInput1 = ({numbers, onChange}) => {
+    return <input id = "first" type = "number" placeholder = "minitus" value = {numbers} onChange = {onChange} />
+  };
+
+  const HourLabel = () => {
+    return <label htmlFor = "second">시간</label>;
+  };
+  const HourInput1 = ({numbers}) => {
+    return <input id = "second" type = "number" placeholder = "hours" disabled = {true}
+                  value = {Math.floor(numbers / 60)} />
+  };
+
+  const APP = () => {
+    let [numbers, setNumbers] = React.useState(0);
+    const onChange = (event) => {
+      setNumbers(event.target.value);
+      console.log(numbers);
+      console.log(event.target);
+      console.log(event.target.value);
+    }
+    return (<div>
+        <H numbers = {numbers} />
+        <MinLabel />
+        <MinInput1 numbers = {numbers} onChange = {onChange} />
+        <HourLabel />
+        <HourInput1 numbers = {numbers} />
+      </div>
+    );
+  }
+
+  ReactDOM.render(<APP />, document.getElementById("root"));
+</script>
+</body>
+</html>
