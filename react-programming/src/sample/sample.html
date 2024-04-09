@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+
+  let student= {
+    name: "홍길동",
+    age: 19,
+  }
+
+  // let name = student.name;
+  // let age = student.age;
+  // let {name, age} = student
+  let {name} = student
+  let {age} = student
+
+  let student2= {
+    name ,
+    age
+  }
+  console.log(student);
+  console.log(student2);
+
+  let array = [1, 2, 3];
+  // let [a, b, c] = array;
+  // let [a, b] = array;
+  let [a,b, ...rest] = array;
+  console.log(a);
+
+  console.log(rest);
+
+  let array1 = [1, 2];
+  let array2 = [3, 4];
+  let array3 = array1.concat(array2);
+  console.log(array3);
+
+  let array4 = [...array1, ...array2];
+  console.log(array4);
+
+  let array5 = [...array1];
+  let array6 = array1;
+  console.log(array5 === array1);
+  console.log(array6 === array1);
+
+  let student1 = {...student, address: "주소"};
+  student2 = {...student, name: "김연아"};
+
+  console.log(student1);
+  console.log(student2);
+
+</script>
+</body>
+</html>
