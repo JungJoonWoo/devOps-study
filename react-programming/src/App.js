@@ -5,7 +5,8 @@ function App() {
   return (
     <div className = "App">
       <h1>my react app</h1>
-      <Button text = "start" />
+      <Button text = "start" color="violet"/>
+      <Button text = "end" color="green"/>
     </div>
   );
 }
