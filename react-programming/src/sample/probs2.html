@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport"
+	      content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv = "X-UA-Compatible" content = "ie=edge">
+	<title>Document</title>
+	<script src = "https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+
+<div id = "root">
+	<script type = "text/babel">
+
+    function Btn(probs) {
+      console.log(probs.text);
+      return (
+        <button style = {{
+          backgroundColor: "violet",
+          color: "white",
+          padding: "5px 10px",
+          borderRadius: 10,
+          fontSize: "10px",
+
+        }}
+                onClick = {probs.onClick}
+                onMouseOver = {probs.onMouseOver}
+                onMouseOut = {probs.onMouseOut}
+        >{probs.text}</button>
+      );
+    }
+
+    const MemoBtn = React.memo(Btn);
+
+      function App() {
+        let [value1, setValue] = React.useState("save");
+        const onChange = () => setValue((cur) => (cur === "save") ? "Revert" : "save");
+
+        let [value2, setValue2] = React.useState("confirm");
+        const onChange2 = () => setValue2("undo");
+        const onChange3 = () => setValue2("confirm");
+
+        return (
+          <div>
+            <MemoBtn text = {value1} onClick = {onChange} />
+            <MemoBtn text = {value2} onMouseOver = {onChange2} onMouseOut = {onChange3} />
+            <MemoBtn text = "No1" />
+
+          </div>
+        );
+      }
+
+    ReactDOM.render(<App />, root);
+	</script>
+
+</div>
+</body>
+</html>
