@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
-function Movie({coverImage, title, summary, genres}) {
+function Movie({id, coverImage, title, summary, genres}) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const getMovie = async () => {
@@ -16,8 +17,11 @@ function Movie({coverImage, title, summary, genres}) {
 
   return (
     <div>
+
       <img src = {coverImage} alt = "img"></img>
-      <p>{title}</p>
+      <p><Link to={`/movie/${id}`}>{title}</Link></p>
+      {/*<p><a href= {`/movie?id=${id}`}>{title}</a></p>*/}
+      {/*<p><a href= {`/movie/${id}`}>{title}</a></p>*/}
       <p>{summary}</p>
       <ul>
         {genres.map((genre, index) => <li key = {index}>{genre}</li>)}
