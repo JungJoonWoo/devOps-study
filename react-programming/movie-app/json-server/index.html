@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<h1>데이터 가져오기</h1>
+<script>
+
+	function getData(){
+    const data = fetch("http://127.0.0.1:3000/posts").then((response) => response.json());
+    console.log(data);
+  }
+
+  getData();
+</script>
+</body>
+</html>

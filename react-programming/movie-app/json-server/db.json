@@ -1,0 +1,70 @@
+{
+  "posts"   : [
+    {
+      "id"   : "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id"   : "2",
+      "title": "the third title",
+      "views": 1
+    }
+  ],
+  "comments": [
+    {
+      "id"    : "1",
+      "text"  : "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id"    : "2",
+      "text"  : "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile" : {
+    "name": "typicode"
+  },
+  "students": [
+    {
+      "_id"     : "661cdc2ea43ad5553664ea17",
+      "index"   : 0,
+      "guid"    : "d70fff80-48ea-49d2-b993-0c0ce89aead0",
+      "isActive": false,
+      "age"     : 39,
+      "eyeColor": "blue",
+      "name"    : "Deborah Fernandez",
+      "gender"  : "female",
+      "company" : "GEEKKO",
+      "email"   : "deborahfernandez@geekko.com",
+      "phone"   : "+1 (820) 552-2570"
+    },
+    {
+      "_id"     : "661cdc2e94526234877f9cc5",
+      "index"   : 1,
+      "guid"    : "4c68e39e-e5f8-4358-a4fe-e0455a360df7",
+      "isActive": true,
+      "age"     : 27,
+      "eyeColor": "brown",
+      "name"    : "Morin Simpson",
+      "gender"  : "male",
+      "company" : "VICON",
+      "email"   : "morinsimpson@vicon.com",
+      "phone"   : "+1 (996) 487-3289"
+    },
+    {
+      "_id"     : "661cdc2eec7848327cf88752",
+      "index"   : 2,
+      "guid"    : "0cb2c492-7cce-4e4a-874d-04034a4e5ce4",
+      "isActive": false,
+      "age"     : 20,
+      "eyeColor": "blue",
+      "name"    : "Andrews Sanders",
+      "gender"  : "male",
+      "company" : "WRAPTURE",
+      "email"   : "andrewssanders@wrapture.com",
+      "phone"   : "+1 (846) 513-3107"
+    }
+  ]
+}
