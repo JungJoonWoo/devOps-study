@@ -15,7 +15,7 @@ function App2() {
     switch (action.type) {
       case actionType.ADD:
         if (!state.includes(action.payload) && action.payload) {
-          return [...state, {text: action.payload, isComplete: false}];
+          return [...state, {text: action.payload, isCompleted  : false}];
         }
         return state;
       case actionType.DELETE:
