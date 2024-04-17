@@ -6,7 +6,6 @@ class AppPokemon extends React.Component {
     this.state = {
       result: [],
       loading: false,
-
     }
   }
 
@@ -24,7 +23,7 @@ class AppPokemon extends React.Component {
     console.log(this.state.result)
     return (
       <div className = {"App"}>
-        <header className = {"appheader"}>
+        <header className = {"App-header"}>
           <h1>Pokemon</h1>
           <hr />
         </header>

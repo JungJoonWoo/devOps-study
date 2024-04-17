@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 function Detail() {
-  let { id } = useParams();
+  let {id} = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -21,25 +21,25 @@ function Detail() {
 
   return (
     <div>
-      {loading ? (
-        "loading..."
-      ) : (
+      {loading ? "loading..." : (
         data ? (
           <div>
             <h1>{data.title_long} Detail</h1>
             <h3>{data.slug}</h3>
             <hr />
-            <img src = {data.medium_cover_image} alt = {`${data.title} Cover`} />
+            <img src = {data.large_cover_image} alt = {`${data.title} Cover`} />
             <br />
             <br />
             <span>평점: </span>
-            <span>{data.rating} </span>
+            <span>{data.rating}점 </span>
+            <br />
+            <br />
             <span> 런타임: </span>
-            <span>{data.runtime} </span>
-            <h1>장르</h1>
+            <span>{data.runtime}분 </span>
+            <h3>장르</h3>
             {data.genres && data.genres.map((genre, index) => <span key = {index}>{genre} </span>)}
             <h3>설명</h3>
-            <span>{data.description_full} </span>
+            <span><textarea cols={100} rows={10}>{data.description_full}</textarea>  </span>
 
           </div>
         ) : (
