@@ -18,6 +18,7 @@ public class BookList {
       System.out.println("드라이버 로드 성공");
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
+
     }
 // Class.forName()으로 드라이버를 로딩한다. 드라이버 이름을 Class.forName에 입력한다.
     try { /* 데이터베이스를 연결하는 과정 */
