@@ -9,8 +9,8 @@ import java.sql.Date;
 
 @Builder
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Student {
   private int id;
   private String username;
