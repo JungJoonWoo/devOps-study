@@ -75,8 +75,11 @@ public class NewsController extends HttpServlet {
           log(news.toString());
 
           ctx.getRequestDispatcher(START_PAGE).forward(request, response);
+        } else if (action.equals("login")) {
+          String id = request.getParameter("id");
+          String pw = request.getParameter("password");
+          
         }
-
 
       } catch (SQLException e) {
         e.printStackTrace();

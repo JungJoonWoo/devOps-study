@@ -18,10 +18,10 @@
 <header>
     <h1>${news.title}</h1>
     <hr>
-<%--    <img src = "${news.img}" alt = "${news.img}" width = "300" height = "300">--%>
 
 </header>
-    <img src="/img/test.jpg" alt="test.jpg" width="300" height="300">
+<%--    <img src = "${news.img}" alt = "${news.img}" crossorigin="anonymous" width = "300" height = "300">--%>
+    <img src="/img/test.jpg" alt="test.jpg" crossorigin="anonymous" width="300" height="300">
 <main>
     <div>
         Date: ${news.date}
